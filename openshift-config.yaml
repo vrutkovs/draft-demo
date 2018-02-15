@@ -75,7 +75,7 @@ items:
       source:
         git:
           ref: openshift
-          uri: https://github.com/vrutkovs/openshift-demo.git
+          uri: https://github.com/vrutkovs/draft-demo.git
         type: Git
       strategy:
         dockerStrategy:
