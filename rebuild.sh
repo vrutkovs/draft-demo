@@ -2,4 +2,4 @@
 set -x
 git yolo
 git push origin -f
-oc start-build draft-demo -w
+oc start-build openshift-demo -w
