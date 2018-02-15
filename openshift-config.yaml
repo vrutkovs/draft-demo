@@ -10,7 +10,7 @@ items:
       creationTimestamp: null
       generation: 2
       labels:
-        app: draft-demo
+        app: openshift-demo
       name: fedora
     spec:
       lookupPolicy:
@@ -36,8 +36,8 @@ items:
       creationTimestamp: null
       generation: 1
       labels:
-        app: draft-demo
-      name: draft-demo
+        app: openshift-demo
+      name: openshift-demo
     spec:
       lookupPolicy:
         local: false
@@ -45,7 +45,7 @@ items:
       - annotations: null
         from:
           kind: DockerImage
-          name: 172.30.1.1:5000/myproject/draft-demo:latest
+          name: 172.30.1.1:5000/myproject/openshift-demo:latest
         generation: null
         importPolicy: {}
         name: latest
@@ -60,22 +60,22 @@ items:
         openshift.io/generated-by: OpenShiftNewApp
       creationTimestamp: null
       labels:
-        app: draft-demo
-      name: draft-demo
+        app: openshift-demo
+      name: openshift-demo
     spec:
       failedBuildsHistoryLimit: 5
       nodeSelector: null
       output:
         to:
           kind: ImageStreamTag
-          name: draft-demo:latest
+          name: openshift-demo:latest
       postCommit: {}
       resources: {}
       runPolicy: Serial
       source:
         git:
           ref: openshift
-          uri: https://github.com/vrutkovs/draft-demo.git
+          uri: https://github.com/vrutkovs/openshift-demo.git
         type: Git
       strategy:
         dockerStrategy:
@@ -104,14 +104,14 @@ items:
       creationTimestamp: null
       generation: 1
       labels:
-        app: draft-demo
-      name: draft-demo
+        app: openshift-demo
+      name: openshift-demo
     spec:
       replicas: 1
       revisionHistoryLimit: 10
       selector:
-        app: draft-demo
-        deploymentconfig: draft-demo
+        app: openshift-demo
+        deploymentconfig: openshift-demo
       strategy:
         activeDeadlineSeconds: 21600
         resources: {}
@@ -128,13 +128,13 @@ items:
             openshift.io/generated-by: OpenShiftNewApp
           creationTimestamp: null
           labels:
-            app: draft-demo
-            deploymentconfig: draft-demo
+            app: openshift-demo
+            deploymentconfig: openshift-demo
         spec:
           containers:
-          - image: 172.30.1.1:5000/myproject/draft-demo@sha256:b530f236939ad7883413f292b0a7df750d8bb4098d345ad00a3fc9a2102d9bf2
+          - image: 172.30.1.1:5000/myproject/openshift-demo@sha256:b530f236939ad7883413f292b0a7df750d8bb4098d345ad00a3fc9a2102d9bf2
             imagePullPolicy: Always
-            name: draft-demo
+            name: openshift-demo
             ports:
             - containerPort: 8080
               protocol: TCP
@@ -152,10 +152,10 @@ items:
       - imageChangeParams:
           automatic: true
           containerNames:
-          - draft-demo
+          - openshift-demo
           from:
             kind: ImageStreamTag
-            name: draft-demo:latest
+            name: openshift-demo:latest
             namespace: myproject
         type: ImageChange
     status:
@@ -172,8 +172,8 @@ items:
         openshift.io/generated-by: OpenShiftNewApp
       creationTimestamp: null
       labels:
-        app: draft-demo
-      name: draft-demo
+        app: openshift-demo
+      name: openshift-demo
     spec:
       ports:
       - name: 8080-tcp
@@ -181,8 +181,8 @@ items:
         protocol: TCP
         targetPort: 8080
       selector:
-        app: draft-demo
-        deploymentconfig: draft-demo
+        app: openshift-demo
+        deploymentconfig: openshift-demo
       sessionAffinity: None
       type: ClusterIP
     status:
@@ -192,15 +192,15 @@ items:
     metadata:
       creationTimestamp: null
       labels:
-        app: draft-demo
-      name: draft-demo
+        app: openshift-demo
+      name: openshift-demo
     spec:
       host: openshift.127.0.0.1.xip.io
       port:
         targetPort: 8080-tcp
       to:
         kind: Service
-        name: draft-demo
+        name: openshift-demo
         weight: 100
       wildcardPolicy: None
     status:
