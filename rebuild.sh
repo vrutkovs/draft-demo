@@ -1,4 +1,4 @@
-#!/bin/bassh
+#!/bin/bash
 set -x
 git yolo
 git push origin -f
