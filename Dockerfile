@@ -5,6 +5,8 @@ RUN dnf update -y && \
     dnf clean all
 
 RUN mkdir /code
-ADD . /code
+ADD server.py /code
+
 EXPOSE 8080
+
 CMD ["python3", "/code/server.py"]
