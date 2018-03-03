@@ -1,32 +1,28 @@
 try {
    timeout(time: 20, unit: 'MINUTES') {
-      def appName="spblug"
-      def project="blue-green"
       def tag="blue"
       def altTag="green"
-      def verbose="true"
 
       node {
-        project = env.PROJECT_NAME
         stage("Initialize") {
-          sh "oc get route ${appName} -n ${project} -o jsonpath='{ .spec.to.name }' --loglevel=4 > activeservice"
+          sh "oc get route blue-green -n blue-green -o jsonpath='{ .spec.to.name }' --loglevel=4 > activeservice"
           activeService = readFile('activeservice').trim()
-          if (activeService == "${appName}-blue") {
+          if (activeService == "blue") {
             tag = "green"
             altTag = "blue"
           }
-          sh "oc get route ${tag}-${appName} -n ${project} -o jsonpath='{ .spec.host }' --loglevel=4 > routehost"
+          sh "oc get route blue-green -n blue-green-o jsonpath='{ .spec.host }' --loglevel=4 > routehost"
           routeHost = readFile('routehost').trim()
         }
 
         stage("Build") {
           echo "building tag ${tag}"
-          openshiftBuild buildConfig: appName, showBuildLogs: "true", verbose: verbose
+          openshiftBuild buildConfig: "pipeline-app", showBuildLogs: "true", verbose: "true"
         }
 
         stage("Deploy Test") {
-          openshiftTag srcStream: appName, srcTag: 'latest', destinationStream: appName, destinationTag: tag, verbose: verbose
-          openshiftVerifyDeployment deploymentConfig: "${appName}-${tag}", verbose: verbose
+          openshiftTag srcStream: "pipeline-app", srcTag: 'latest', destinationStream: "pipeline-app", destinationTag: tag, "true": "true"
+          openshiftVerifyDeployment deploymentConfig: "${tag}", verbose: "true"
         }
 
         stage("Automated tests") {
@@ -40,10 +36,10 @@ try {
         }
 
         stage("Go Live") {
-          sh "oc set -n ${project} route-backends ${appName} ${appName}-${tag}=100 ${appName}-${altTag}=0 --loglevel=4"
+          sh "oc set -n blue-green route-backends prod-route ${tag}=100 ${altTag}=0 --loglevel=4"
 
           // Canary deployment
-          // sh "oc set -n ${project} route-backends ${appName} ${appName}-${tag}=10 ${appName}-${altTag}=90 --loglevel=4"
+          // sh "oc set -n blue-green route-backends pipeline-app ${tag}=10 ${altTag}=90 --loglevel=4"
           // input message: "10% deployment on http://${routeHost}. Approve?", id: "approval"
         }
       }

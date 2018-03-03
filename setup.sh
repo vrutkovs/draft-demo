@@ -11,9 +11,12 @@ oc replace --force -f config/buildconfig.yaml
 # blue
 oc replace --force -f config/blue-deploymentconfig.yaml
 oc replace --force -f config/blue-service.yaml
+oc replace --force -f config/blue-route.yaml
 
 # green
 oc replace --force -f config/green-deploymentconfig.yaml
 oc replace --force -f config/green-service.yaml
+oc replace --force -f config/green-route.yaml
 
-oc replace --force -f config/route.yaml
+# Prod route
+oc replace --force -f config/route-prod.yaml
