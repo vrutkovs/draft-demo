@@ -5,9 +5,9 @@ node {
     sh "oc replace -f config/imagestream.yaml"
     sh "oc replace -f config/buildconfig.yaml"
     sh "oc replace -f config/deploymentconfig.yaml"
-    sh "oc replace -f config/service.yaml"
+    sh "oc apply -f config/service.yaml"
     sh "oc replace -f config/deploymentconfig-tested.yaml"
-    sh "oc replace -f config/service-tested.yaml"
+    sh "oc apply -f config/service-tested.yaml"
     sh "oc replace -f config/route.yaml"
   }
 
