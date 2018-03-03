@@ -1,5 +1,6 @@
 node {
   stage("Reconfigure the namespace") {
+    sh "ls -la"
     sh "oc replace -f config/buildconfig.yaml"
     sh "oc replace -f config/deploymentconfig.yaml"
     sh "oc replace -f config/service.yaml"
