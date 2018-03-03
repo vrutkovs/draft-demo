@@ -56,7 +56,7 @@ spec:
       - pipeline-app-tested
       from:
         kind: ImageStreamTag
-        name: pipeline-app:tested
+        name: pipeline-app:smoketested
         namespace: pipelines
     type: ImageChange
 status:
