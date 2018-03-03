@@ -13,7 +13,7 @@ oc replace --force -f config/blue-deploymentconfig.yaml
 oc replace --force -f config/blue-service.yaml
 
 # green
-oc replace --force -f config/blue-deploymentconfig.yaml
-oc replace --force -f config/blue-service.yaml
+oc replace --force -f config/green-deploymentconfig.yaml
+oc replace --force -f config/green-service.yaml
 
 oc replace --force -f config/route.yaml
