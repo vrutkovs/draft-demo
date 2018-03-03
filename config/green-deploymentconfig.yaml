@@ -31,7 +31,7 @@ spec:
       creationTimestamp: null
       labels:
         app: blue-green
-        deploymentconfig: blue-green
+        deploymentconfig: green
     spec:
       containers:
       - imagePullPolicy: Always
