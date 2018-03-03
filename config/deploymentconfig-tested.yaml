@@ -9,7 +9,7 @@ metadata:
     app: pipeline-app
   name: pipeline-app-tested
 spec:
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 10
   selector:
     app: pipeline-app
