@@ -1,9 +1,8 @@
 node {
   stage("Reconfigure the namespace") {
     checkout scm
-    sh "ls -la"
-    sh "ls -la .."
-    sh "ls -la ../.."
+    sh "oc replace -f config/fedora-imagestream.yaml"
+    sh "oc replace -f config/imagestream.yaml"
     sh "oc replace -f config/buildconfig.yaml"
     sh "oc replace -f config/deploymentconfig.yaml"
     sh "oc replace -f config/service.yaml"
