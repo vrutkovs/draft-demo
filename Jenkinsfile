@@ -29,7 +29,13 @@ try {
           openshiftVerifyDeployment deploymentConfig: "${appName}-${tag}", verbose: verbose
         }
 
-        stage("Test") {
+        stage("Automated tests") {
+          sh "curl -kLvs http://${routeHost}/ | grep 'Hello, Anonymous'"
+          sh "curl -kLvs http://${routeHost}/containers | grep 'Hello, containers'"
+          sh "curl -kLvs http://${routeHost}/Питер | grep 'Hello, Питер'"
+        }
+
+        stage("Manual test and approve") {
           input message: "Test deployment: http://${routeHost}. Approve?", id: "approval"
         }
 
