@@ -3,10 +3,14 @@ kind: Route
 metadata:
   creationTimestamp: null
   labels:
-    app: pipeline-app
-  name: pipeline-app
+    app: blue-green
+  name: blue-green
 spec:
-  host: pipelines.cloud.vrutkovs.eu
+  alternateBackends:
+  - kind: Service
+    name: green
+    weight: 100
+  host: blue-green.cloud.vrutkovs.eu
   port:
     targetPort: 8080-tcp
   tls:
@@ -14,6 +18,6 @@ spec:
     termination: edge
   to:
     kind: Service
-    name: pipeline-app-tested
-    weight: 100
+    name: blue
+    weight: 0
   wildcardPolicy: None
