@@ -1,5 +1,6 @@
 node {
   stage("Reconfigure the namespace") {
+    checkout scm
     sh "ls -la"
     sh "ls -la .."
     sh "ls -la ../.."
