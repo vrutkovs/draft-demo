@@ -25,6 +25,6 @@ node {
 
   stage("Deploy to tested") {
       openshiftTag srcStream: "pipeline-app", srcTag: 'latest', destinationStream: "pipeline-app", destinationTag: "smoketested"
-      openshiftDeploy deploymentConfig: "pipeline-smoketested"
+      openshiftDeploy deploymentConfig: "pipeline-app-tested"
   }
 }
