@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+    openshift.io/image.dockerRepositoryCheck: 2018-03-03T13:28:41Z
+  creationTimestamp: null
+  generation: 2
+  labels:
+    app: pipeline-app
+  name: fedora
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - annotations:
+      openshift.io/imported-from: fedora:27
+    from:
+      kind: DockerImage
+      name: docker-registry.default.svc:5000/woot/fedora:27
+    generation: 2
+    importPolicy: {}
+    name: "27"
+    referencePolicy:
+      type: Source
+status:
+  dockerImageRepository: ""
