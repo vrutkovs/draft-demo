@@ -20,7 +20,11 @@ node {
   }
 
   stage("Smoketest") {
-      sh "curl -kLvs http://pipeline-app.pipelines.svc:8080/containers | grep 'Hello, containers'"
+    def prefix = "http://pipeline-app.pipelines.svc:8080"
+
+    sh "curl -kLvs ${prefix}/ | grep 'Hello, Anonymous'"
+    sh "curl -kLvs ${prefix}/containers | grep 'Hello, containers'"
+    sh "curl -kLvs ${prefix}/Питер | grep 'Hello, Питер'"
   }
 
   stage("Deploy to tested") {
