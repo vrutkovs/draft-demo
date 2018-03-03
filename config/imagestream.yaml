@@ -24,5 +24,11 @@ spec:
     name: green
     referencePolicy:
       type: ""
+  - annotations: null
+    generation: null
+    importPolicy: {}
+    name: latest
+    referencePolicy:
+      type: ""
 status:
   dockerImageRepository: ""
