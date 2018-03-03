@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pipeline-app
+  name: pipeline-app
+spec:
+  host: pipelines.cloud.vrutkovs.eu
+  port:
+    targetPort: 8080-tcp
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: pipeline-app
+    weight: 100
+  wildcardPolicy: None

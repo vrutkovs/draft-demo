@@ -1,4 +1,11 @@
 node {
+  stage("Reconfigure the namespace") {
+    sh "oc replace -f config/buildconfig.yaml"
+    sh "oc replace -f config/deploymentconfig.yaml"
+    sh "oc replace -f config/service.yaml"
+    sh "oc replace -f config/route.yaml"
+  }
+
   stage("Build") {
       openshiftBuild buildConfig: "pipeline-app", showBuildLogs: "true"
   }
@@ -16,4 +23,3 @@ node {
       openshiftDeploy deploymentConfig: "pipeline-smoketested"
   }
 }
-
