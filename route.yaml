@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spblug-custom
+  name: spblug-custom
+spec:
+  host: demo-custom.cloud.vrutkovs.eu
+  port:
+    targetPort: 8080-tcp
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  to:
+    kind: Service
+    name: spblug-custom
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: 2018-03-03T13:34:57Z
+      status: "True"
+      type: Admitted
+    host: demo-custom.cloud.vrutkovs.eu
+    routerName: router
+    wildcardPolicy: None
