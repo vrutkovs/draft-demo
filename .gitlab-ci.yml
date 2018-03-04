@@ -36,4 +36,4 @@ autotest:
 canary:
   stage: canary
   script:
-    - for i in `seq 10 10 100`; do oc set route-backends prod-route ${TAG}=$i ${ALTTAG}=$((100-i)) && sleep 10; done
+    - for i in `seq 10 10 100`; do oc set route-backends prod-route ${TAG}=$i ${ALTTAG}=$((100-i)) && sleep 3; done
