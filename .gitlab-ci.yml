@@ -11,7 +11,7 @@ before_script:
   - oc project blue-green
   - export TAG="blue"
   - export ALTTAG="green"
-  - export ACTIVE=$(oc get route blue-green -o jsonpath='{ .spec.to.name }' --loglevel=4)
+  - export ACTIVE=$(oc get route prod-route -o jsonpath='{ .spec.to.name }' --loglevel=4)
   - if [ $ACTIVE == "blue" ]; then export TAG="green" ALTTAG="blue"; fi
   - export TAGHOST="$TAG.blue-green.svc"
 
@@ -36,4 +36,4 @@ autotest:
 canary_deployment:
   stage: canary_deployment
   script:
-    - for i in `seq 10 10 100` do; oc set route-backends blue-green ${TAG}=$i ${ALTTAG}=$(100-i) --loglevel=4 && sleep 10; done
+    - for i in `seq 10 10 100` do; oc set route-backends prod-route ${TAG}=$i ${ALTTAG}=$(100-i) --loglevel=4 && sleep 10; done
