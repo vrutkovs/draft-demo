@@ -19,11 +19,14 @@ spec:
   runPolicy: Serial
   source:
     git:
-      uri: https://gitlab.cloud.vrutkovs.eu/vrutkovs/openshift-demo
+      uri: https://gitlab.cloud.vrutkovs.eu/vrutkovs/openshift-demo.git
       branch: blue-green
     type: Git
   strategy:
     sourceStrategy:
+      env:
+        - name: GIT_SSL_NO_VERIFY
+          value: '1'
       from:
         kind: ImageStreamTag
         name: python:3.6
