@@ -2,6 +2,9 @@ image: openshift/jenkins-slave-base-centos7
 
 stages:
   - build
+  - deploy
+  - autotest
+  - canary
 
 before_script:
   - oc login --insecure-skip-tls-verify=true kubernetes.default.svc --token=$OPENSHIFT_TOKEN
@@ -18,19 +21,19 @@ build:
     - oc start-build blue-green --wait
 
 deploy:
-  stage: build
+  stage: deploy
   script:
     - oc tag blue-green:latest blue-green:${TAG}
     - oc rollout latest dc/${TAG}
 
 autotest:
-  stage: build
+  stage: autotest
   script:
     - curl -kLs http://${TAGHOST}:8080/ | tee | grep 'Anonymous'
     - curl -kLs http://${TAGHOST}:8080/containers | tee | grep 'containers'
     - curl -kLs http://${TAGHOST}:8080/Питер | tee | grep 'Питер'
 
-canary_deployment:
-  stage: build
+canary:
+  stage: canary
   script:
     - for i in `seq 10 10 100` do; oc set route-backends prod-route ${TAG}=$i ${ALTTAG}=$(100-i) --loglevel=4 && sleep 10; done
