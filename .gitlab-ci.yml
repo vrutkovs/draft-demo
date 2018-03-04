@@ -13,7 +13,7 @@ before_script:
   - export ALTTAG="green"
   - export ACTIVE=$(oc get route blue-green -o jsonpath='{ .spec.to.name }' --loglevel=4)
   - if [ $ACTIVE == "blue" ]; then export TAG="green" ALTTAG="blue"; fi
-  - export ROUTEHOST=$(oc get route blue-green -o jsonpath='{ .spec.host }' --loglevel=4)
+  - export TAGHOST="$TAG.blue-green.svc"
 
 build:
   stage: build
@@ -24,14 +24,14 @@ deploy:
   stage: deploy
   script:
     - oc tag pipeline-app:latest pipeline-app:${TAG}
-    - oc rollout latest dc/${TAG} --wait
+    - oc rollout latest dc/${TAG}
 
 autotest:
   stage: autotest
   script:
-    - curl -kLvs http://${routeHost}/ | grep 'Hello, Anonymous'
-    - curl -kLvs http://${routeHost}/containers | grep 'Hello, containers'
-    - curl -kLvs http://${routeHost}/Питер | grep 'Hello, Питер'
+    - curl -kLvs http://${TAGHOST}/ | grep 'Hello, Anonymous'
+    - curl -kLvs http://${TAGHOST}/containers | grep 'Hello, containers'
+    - curl -kLvs http://${TAGHOST}/Питер | grep 'Hello, Питер'
 
 canary_deployment:
   stage: canary_deployment
