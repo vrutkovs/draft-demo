@@ -19,7 +19,7 @@ spec:
   runPolicy: Serial
   source:
     git:
-      uri: http://gitlab.gitlab.svc/vrutkovs/openshift-demo
+      uri: https://gitlab.cloud.vrutkovs.eu/vrutkovs/openshift-demo
       branch: blue-green
     type: Git
   strategy:
