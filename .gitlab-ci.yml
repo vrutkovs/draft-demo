@@ -29,9 +29,9 @@ deploy:
 autotest:
   stage: autotest
   script:
-    - curl -kLvs http://${TAGHOST}/ | grep 'Hello, Anonymous'
-    - curl -kLvs http://${TAGHOST}/containers | grep 'Hello, containers'
-    - curl -kLvs http://${TAGHOST}/Питер | grep 'Hello, Питер'
+    - curl -kLvs http://${TAGHOST}:8080/ | grep 'Hello, Anonymous'
+    - curl -kLvs http://${TAGHOST}:8080/containers | grep 'Hello, containers'
+    - curl -kLvs http://${TAGHOST}:8080/Питер | grep 'Hello, Питер'
 
 canary_deployment:
   stage: canary_deployment
