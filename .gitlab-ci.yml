@@ -2,22 +2,38 @@ image: openshift/jenkins-slave-base-centos7
 
 stages:
   - build
-
-variables:
-  # Configure these variables in Secure Variables:
-  # OPENSHIFT_SERVER: https://openshift.domain.com:8443
-  # OPENSHIFT_TOKEN: my.openshift.token
-  # OPENSHIFT_DOMAIN: routes.openshift.domain.com
+  - deploy
+  - autotest
+  - canary_deployment
 
 before_script:
-  - ls -la
-  - env
-  - which oc
-  - echo $OPENSHIFT_TOKEN
   - oc login --insecure-skip-tls-verify=true kubernetes.default.svc --token=$OPENSHIFT_TOKEN
-  - oc get pods
+  - oc project blue-green
+  - export TAG="blue"
+  - export ALTTAG="green"
+  - export ACTIVE=$(oc get route blue-green -o jsonpath='{ .spec.to.name }' --loglevel=4)
+  - if [ $ACTIVE == "blue" ] then; export TAG="green"; export ALTTAG="blue"; fi
+  - export ROUTEHOST=$(oc get route blue-green -o jsonpath='{ .spec.host }' --loglevel=4)
 
 build:
   stage: build
   script:
-    - echo build
+    - oc start-build pipeline-app --wait
+
+deploy:
+  stage: deploy
+  script:
+    - oc tag pipeline-app:latest pipeline-app:${TAG}
+    - oc rollout latest ${TAG} --wait
+
+autotest:
+  stage: autotest
+  script:
+    - curl -kLvs http://${routeHost}/ | grep 'Hello, Anonymous'
+    - curl -kLvs http://${routeHost}/containers | grep 'Hello, containers'
+    - curl -kLvs http://${routeHost}/Питер | grep 'Hello, Питер'
+
+canary_deployment:
+  stage: canary_deployment
+  script:
+    - for i in `seq 10 10 100` do; oc set route-backends pipeline-app ${TAG}=$i ${ALTTAG}=$(100-i) --loglevel=4 && sleep 10; done
