@@ -10,10 +10,12 @@ variables:
   # OPENSHIFT_DOMAIN: routes.openshift.domain.com
 
 before_script:
-  - export OPENSHIFT_TOKEN=$(cat /var/lib/kubernetes/secrets/serviceaccount/gitlab)
-  - oc login "$OPENSHIFT_SERVER" --token="$OPENSHIFT_TOKEN" --insecure-skip-tls-verify
-  - oc project "$CI_PROJECT_NAME"
-  - oc get bc
+  - ls -la
+  - env
+  - which oc
+  - echo $OPENSHIFT_TOKEN
+  - oc login --insecure-skip-tls-verify=true kubernetes.default.svc --token=$OPENSHIFT_TOKEN
+  - oc get pods
 
 build:
   stage: build
