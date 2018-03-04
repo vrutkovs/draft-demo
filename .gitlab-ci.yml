@@ -18,12 +18,12 @@ before_script:
 build:
   stage: build
   script:
-    - oc start-build pipeline-app --wait
+    - oc start-build blue-green --wait
 
 deploy:
   stage: deploy
   script:
-    - oc tag pipeline-app:latest pipeline-app:${TAG}
+    - oc tag blue-green:latest blue-green:${TAG}
     - oc rollout latest dc/${TAG}
 
 autotest:
@@ -36,4 +36,4 @@ autotest:
 canary_deployment:
   stage: canary_deployment
   script:
-    - for i in `seq 10 10 100` do; oc set route-backends pipeline-app ${TAG}=$i ${ALTTAG}=$(100-i) --loglevel=4 && sleep 10; done
+    - for i in `seq 10 10 100` do; oc set route-backends blue-green ${TAG}=$i ${ALTTAG}=$(100-i) --loglevel=4 && sleep 10; done
