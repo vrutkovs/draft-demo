@@ -1,0 +1,16 @@
+image: openshift/jenkins-slave-base-centos7/
+
+stages:
+  - build
+
+variables:
+  # Configure these variables in Secure Variables:
+  # OPENSHIFT_SERVER: https://openshift.domain.com:8443
+  # OPENSHIFT_TOKEN: my.openshift.token
+  # OPENSHIFT_DOMAIN: routes.openshift.domain.com
+
+before_script:
+  - export OPENSHIFT_TOKEN=$(cat /var/lib/kubernetes/secrets/serviceaccount/gitlab)
+  - oc login "$OPENSHIFT_SERVER" --token="$OPENSHIFT_TOKEN" --insecure-skip-tls-verify
+  - oc project "$CI_PROJECT_NAME"
+  - oc get bc
