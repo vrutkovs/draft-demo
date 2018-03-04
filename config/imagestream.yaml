@@ -7,7 +7,7 @@ metadata:
   generation: 1
   labels:
     app: pipeline-app
-  name: pipeline-app
+  name: blue-green
 spec:
   lookupPolicy:
     local: false

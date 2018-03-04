@@ -6,21 +6,21 @@ metadata:
   creationTimestamp: null
   labels:
     app: pipeline-app
-  name: pipeline-app
+  name: blue-green
 spec:
   failedBuildsHistoryLimit: 5
   nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
-      name: pipeline-app:latest
+      name: blue-green:latest
   postCommit: {}
   resources: {}
   runPolicy: Serial
   source:
     git:
       uri: http://github.com/vrutkovs/openshift-demo
-      branch: jenkins
+      branch: blue-green
     type: Git
   strategy:
     sourceStrategy:
