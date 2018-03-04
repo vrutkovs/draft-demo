@@ -24,7 +24,7 @@ deploy:
   stage: deploy
   script:
     - oc tag pipeline-app:latest pipeline-app:${TAG}
-    - oc rollout latest ${TAG} --wait
+    - oc rollout latest dc/${TAG} --wait
 
 autotest:
   stage: autotest
