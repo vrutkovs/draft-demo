@@ -1,4 +1,4 @@
-image: openshift/jenkins-slave-base-centos7/
+image: openshift/jenkins-slave-base-centos7
 
 stages:
   - build
