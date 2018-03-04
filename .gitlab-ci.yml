@@ -14,3 +14,8 @@ before_script:
   - oc login "$OPENSHIFT_SERVER" --token="$OPENSHIFT_TOKEN" --insecure-skip-tls-verify
   - oc project "$CI_PROJECT_NAME"
   - oc get bc
+
+build:
+  stage: build
+  script:
+    - echo build
