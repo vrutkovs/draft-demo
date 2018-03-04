@@ -23,14 +23,14 @@ spec:
       branch: blue-green
     type: Git
   strategy:
-    sourceStrategy:
+    dockerStrategy:
       env:
         - name: GIT_SSL_NO_VERIFY
           value: '1'
       from:
         kind: ImageStreamTag
-        name: python:3.6
-        namespace: openshift
+        name: 'fedora:27'
+    type: Docker
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
