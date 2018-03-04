@@ -34,7 +34,8 @@ spec:
         deploymentconfig: green
     spec:
       containers:
-      - imagePullPolicy: Always
+      - image: blue-green:green
+        imagePullPolicy: Always
         name: blue-green
         ports:
         - containerPort: 8080
@@ -50,15 +51,6 @@ spec:
   test: false
   triggers:
   - type: ConfigChange
-  - imageChangeParams:
-      automatic: true
-      containerNames:
-      - blue-green
-      from:
-        kind: ImageStreamTag
-        name: blue-green:green
-        namespace: blue-green
-    type: ImageChange
 status:
   availableReplicas: 0
   latestVersion: 0
