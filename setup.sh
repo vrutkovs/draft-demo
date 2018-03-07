@@ -1,6 +1,6 @@
 #!/bin/bash
 set -eux
-
+ 
 oc new-project blue-green || true
 
 # imagestreams
