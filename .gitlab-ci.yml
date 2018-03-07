@@ -25,6 +25,7 @@ deploy:
   script:
     - oc tag blue-green:latest blue-green:${TAG}
     - oc rollout latest dc/${TAG}
+    - oc rollout status dc/${TAG} -w
 
 autotest:
   stage: autotest
