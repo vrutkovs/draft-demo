@@ -190,6 +190,8 @@ items:
   - apiVersion: v1
     kind: Route
     metadata:
+      annotations:
+        kubernetes.io/tls-acme: "true"
       creationTimestamp: null
       labels:
         app: openshift-demo
