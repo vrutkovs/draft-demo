@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: Route
 metadata:
+  annotation:
+    kubernetes.io/tls-acme: "true"
   creationTimestamp: null
   labels:
     app: spblug-custom
