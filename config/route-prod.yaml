@@ -5,6 +5,8 @@ metadata:
   labels:
     app: blue-green
   name: prod-route
+  annotations:
+    kubernetes.io/tls-acme: "true"
 spec:
   alternateBackends:
   - kind: Service
