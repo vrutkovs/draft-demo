@@ -26,7 +26,7 @@ spec:
     sourceStrategy:
       from:
         kind: ImageStreamTag
-        name: python:3.6
+        name: python:3.5
         namespace: openshift
     type: Source
   successfulBuildsHistoryLimit: 5
