@@ -16,3 +16,6 @@ oc replace --force -f config/service.yaml
 oc replace --force -f config/deploymentconfig-tested.yaml
 oc replace --force -f config/service-tested.yaml
 oc replace --force -f config/route.yaml
+
+# Jenkinsfile
+oc new-build --name=pipeline https://github.com/vrutkovs/openshift-demo\#jenkins --strategy pipeline
