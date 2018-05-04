@@ -1,3 +1,3 @@
-oc new-project demo-master || oc project demo-master
-oc new-app --name=hello https://github.com/vrutkovs/openshift-demo
-oc expose svc/hello --hostname hello-demo-master.e8ca.engint.openshiftapps.com
+oc new-project pydays-demo
+oc new-app --name=hello .
+oc expose svc/hello --hostname pydays-demo.e8ca.engint.openshiftapps.com
