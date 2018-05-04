@@ -32,7 +32,7 @@ autotest:
   script:
     - curl -kLs http://${TAGHOST}:8080/ | tee | grep 'Anonymous'
     - curl -kLs http://${TAGHOST}:8080/containers | tee | grep 'containers'
-    - curl -kLs http://${TAGHOST}:8080/Питер | tee | grep 'Питер'
+    - curl -kLs http://${TAGHOST}:8080/Vienna | tee | grep 'Vienna'
 
 canary:
   stage: canary
