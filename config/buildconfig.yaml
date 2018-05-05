@@ -23,11 +23,11 @@ spec:
       branch: jenkins
     type: Git
   strategy:
-    sourceStrategy:
+    dockerStrategy:
       from:
         kind: ImageStreamTag
-        name: python:3.5
-        namespace: openshift
+        name: fedora:27
+        namespace: pipelines
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
