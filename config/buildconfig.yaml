@@ -31,9 +31,6 @@ spec:
     type: Source
   successfulBuildsHistoryLimit: 5
   triggers:
-  - github:
-      secret: I2p9qR9cV81XrEshrzu6
-    type: GitHub
   - generic:
       secret: 5vidEKDbc9iodkCoUdxS
     type: Generic
