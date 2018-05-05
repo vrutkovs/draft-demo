@@ -20,7 +20,7 @@ spec:
   source:
     git:
       uri: http://github.com/vrutkovs/openshift-demo
-      branch: jenkins
+      ref: jenkins
     type: Git
   strategy:
     dockerStrategy:
