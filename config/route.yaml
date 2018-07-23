@@ -8,7 +8,7 @@ metadata:
     app: pipeline-app
   name: pipeline-app-tested
 spec:
-  host: pipeline-app-tested-pipelines.e8ca.engint.openshiftapps.com
+  host: pipelines.cloud.vrutkovs.eu
   port:
     targetPort: 8080-tcp
   tls:
@@ -19,12 +19,3 @@ spec:
     name: pipeline-app-tested
     weight: 100
   wildcardPolicy: None
-status:
-  ingress:
-  - conditions:
-    - lastTransitionTime: 2018-04-27T19:27:19Z
-      status: "True"
-      type: Admitted
-    host: pipeline-app-tested-pipelines.e8ca.engint.openshiftapps.com
-    routerName: router
-    wildcardPolicy: None
