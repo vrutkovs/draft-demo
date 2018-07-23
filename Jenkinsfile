@@ -1,14 +1,14 @@
 node {
   stage("Reconfigure the namespace") {
     checkout scm
-    sh "oc replace -f config/fedora-imagestream.yaml"
-    sh "oc replace -f config/imagestream.yaml"
-    sh "oc replace -f config/buildconfig.yaml"
-    sh "oc replace -f config/deploymentconfig.yaml"
+    sh "oc apply -f config/fedora-imagestream.yaml"
+    sh "oc apply -f config/imagestream.yaml"
+    sh "oc apply -f config/buildconfig.yaml"
+    sh "oc apply -f config/deploymentconfig.yaml"
     sh "oc apply -f config/service.yaml"
-    sh "oc replace -f config/deploymentconfig-tested.yaml"
+    sh "oc apply -f config/deploymentconfig-tested.yaml"
     sh "oc apply -f config/service-tested.yaml"
-    sh "oc replace -f config/route.yaml"
+    sh "oc apply -f config/route.yaml"
   }
 
   stage("Build") {
