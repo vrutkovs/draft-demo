@@ -24,7 +24,7 @@ node {
 
     sh "curl -kLvs ${prefix}/ | grep 'Hello, Anonymous'"
     sh "curl -kLvs ${prefix}/containers | grep 'Hello, containers'"
-    sh "curl -kLvs ${prefix}/Vienna | grep 'Hello, Vienna'"
+    sh "curl -kLvs ${prefix}/Minsk | grep 'Hello, Minsk'"
   }
 
   stage("Deploy to tested") {
